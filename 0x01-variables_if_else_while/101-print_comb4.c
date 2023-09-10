@@ -1,38 +1,37 @@
-ccurred while loading the file. Please try again.
-holbertonschool-low_level_programming
-0x01-variables_if_else_while
-101-print_comb4.c
-101-print_comb4.c
-415 B
 #include <stdio.h>
+#include <stdlib.h>
 /**
- * main - Entry point
+ * main - A program that prints combination of all three digit numbers.
  *
- * Return: Always 0 (Succes)
+ * Return: Always 0 (Success)
  */
 int main(void)
 {
-	int n;
-	int i;
-	int h;
-	for (h = 0 ; h != 8 ; h++)
+	int hundreds;
+	int tens;
+	int ones;
+	int num;
+
+	for (num = 0; num < 1000; num++)
 	{
-		for (n = h + 1 ; n != 9 ; n++)
+		hundreds = num / 100;
+		tens = (num / 10) % 10;
+		ones = num % 10;
+
+		if (hundreds < tens && tens < ones)
 		{
-			i = n + 1;
-			do {
-				putchar('0' + h);
-				putchar('0' + n);
-				putchar('0' + i);
-				if (h != 7)
-				{
-					putchar(',');
-					putchar(32);
-				}
-				i++;
-			} while (i != 10);
+			putchar(hundreds + '0');
+			putchar(tens + '0');
+			putchar(ones + '0');
+
+			if (num < 700)
+			{
+				putchar(',');
+				putchar(' ');
+			}
 		}
 	}
 	putchar('\n');
+
 	return (0);
 }
