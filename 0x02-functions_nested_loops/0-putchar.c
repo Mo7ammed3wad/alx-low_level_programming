@@ -1,18 +1,18 @@
 #include "main.h"
 /**
- * main - Entry point
- *
- * Return: Alway 0 (Sucess)
- */
+* main - Prints _putchar followed by a newline
+ *
+* Return: Always 0.
+*/
+int main(void){
+int str[] = {95, 112, 117, 116, 99, 104, 97, 114};
+int count, sz;
 
-int main(void)
+sz = sizeof(str) / sizeof(int);
+for (count = 0; count < sz; count++)
 {
-	char *c = "_putchar\n";
-
-	while (*c)
-	{
-		_putchar(*c);
-		c++;
-	}
-	return (0);
+_putchar(str[count]);
+}
+_putchar('\n');
+return (0);
 }
