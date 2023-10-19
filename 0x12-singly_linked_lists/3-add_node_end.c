@@ -1,37 +1,32 @@
+#include <stdlib.h>
+#include <string.h>
 #include "lists.h"
 
 list_t *add_node_end(list_t **head, const char *str)
 {
-	char *dup;
-	int l;
-	list_t *new, *last;
+	unsigned int l = 0;
+	list_t *n_node, *temp;
 
-	new = malloc(sizeof(list_t));
-	if (new == NULL)
-		return (NULL);
-
-	dup = strdup(str);
-	if (str == NULL)
-	{
-		free(new);
-		return (NULL);
-	}
-
-	for (l = 0; str[l];)
+	while (str[l])
 		l++;
+	n_node = malloc(sizeof(list_t));
 
-	new->str = dup;
-	new->l = l;
-	new->next = NULL;
+	if (!n_node)
+		return (NULL);
+
+	n_node->str = strdup(str);
+	n_node->l = l;
+	n_node->next = NULL;
 
 	if (*head == NULL)
-		*head = new;
+		*head = n_node;
 	else
 	{
-		last = *head;
-		while (last->next != NULL)
-			last = last->next;
-		last->next = new;
+		temp = *head;
+		while (temp->next != NULL)
+			temp = temp->next;
+		temp->next = n_node;
 	}
-	return (*head);
+
+	return (n_node);
 }

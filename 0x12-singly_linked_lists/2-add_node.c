@@ -1,30 +1,39 @@
+#include <stdlib.h>
 #include "lists.h"
+
+int _strlen(const char *s)
+{
+	int x;
+
+	for (x = 0; s[x]; x++)
+		;
+	return (x);
+}
 
 list_t *add_node(list_t **head, const char *str)
 {
-	char *dup;
-	int l;
-	list_t *new;
+	int i, len;
+	char *data;
+	list_t *n;
 
-	new = malloc(sizeof(list_t));
-	if (new == NULL)
+	if (str == NULL || head == NULL)
 		return (NULL);
-
-	dup = strdup(str);
-	if (dup == NULL)
+	len = _strlen(str);
+	n = *head;
+	data = malloc(sizeof(char) * (len + 1));
+	if (data == NULL)
+		return (NULL);
+	for (i = 0; str[i]; i++)
+		data[i] = str[i];
+	n = malloc(sizeof(list_t));
+	if (n == NULL)
 	{
-		free(new);
+		free(data);
 		return (NULL);
 	}
-	for (l = 0; str[l];)
-		l++;
-
-	new->str = dup;
-	new->l = l;
-	new->next = *head;
-
-	*head = new;
-
-	return (new);
-
+	n->str = data;
+	n->len = len;
+	n->next = *head;
+	*head = n;
+	return (n);
 }
