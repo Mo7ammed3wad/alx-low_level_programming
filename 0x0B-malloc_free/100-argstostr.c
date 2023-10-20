@@ -7,40 +7,45 @@
 
 char *argstostr(int ac, char **av)
 {
-	char *str, *s;
-	int v, m, k, len = 0;
+	char *new_string = NULL;
+		int g = 0, v = ac, n, sum = 0, temp = 0;
 
-	if (ac == 0 || av == NULL)
-		return (NULL);
+		if (ac == 0 || av == NULL)
+			return (NULL);
 
-	for (v = 0; v < ac; v++)
-	{
-		s = av[i];
-		m = 0;
+		while (ac--)
+			sum += (len(av[ac]) + 1);
+		new_string = (char *) malloc(sum + 1);
 
-		while (s[m++])
-			len++;
-		len++;
-	}
-
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (str == NULL)
-		return (NULL);
-
-	for (v = 0, m = 0; v < ac && m < len; v++)
-	{
-		s = av[i];
-		k = 0;
-
-		while (s[k])
+		if (new_string != NULL)
 		{
-			str[m] = s[k];
-			k++;
-			m++;
+			while (g < v)
+			{
+				for (n = 0; av[g][n] != '\0'; n++)
+					new_string[n + temp] = av[g][n];
+				new_string[temp + n] = '\n';
+				temp += (n + 1);
+				g++;
+			}
+			new_string[temp] = '\0';
 		}
-		str[m++] = '\n';
-	}
-	str[m] = '\0';
+		else
+		{
+			return (NULL);
+		}
+		return (new_string);
+}
 
-	return (str);
+int len(char *str)
+{
+		int len = 0;
+
+		if (str != NULL)
+
+		{
+			while (str[len])
+				len++;
+		}
+
+	return (len);
 }
