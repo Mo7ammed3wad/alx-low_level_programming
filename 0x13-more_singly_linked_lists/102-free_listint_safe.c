@@ -1,50 +1,34 @@
 #include "lists.h"
-#include <stdlib.h>
-#include <stdio.h>
 
-listint_t **_ra(listint_t **list, size_t size, listint_t *new)
+size_t free_listint_safe(listint_t **h)
 {
-	listint_t **newlist;
-	size_t o;
+	size_t l = 0;
+	int d;
+	listint_t *temp;
 
-	newlist = malloc(size * sizeof(listint_t *));
-	if (newlist == NULL)
+	if (!h || !*h)
+		return (0);
+
+	while (*h)
 	{
-		free(list);
-		exit(98);
-	}
-	for (o = 0; o < size - 1; o++)
-		newlist[o] = list[o];
-	newlist[o] = new;
-	free(list);
-	return (newlist);
-}
-
-size_t free_listint_safe(listint_t **head)
-{
-	size_t i, n = 0;
-	listint_t **list = NULL;
-	listint_t *next;
-
-	if (head == NULL || *head == NULL)
-		return (n);
-	while (*head != NULL)
-	{
-		for (i = 0; i < num; i++)
+		d = *h - (*h)->next;
+		if (d > 0)
 		{
-			if (*head == list[i])
-			{
-				*head = NULL;
-				free(list);
-				return (n);
-			}
+			temp = (*h)->next;
+			free(*h);
+			*h = temp;
+			l++;
 		}
-		n++;
-		list = _ra(list, n, *head);
-		next = (*head)->next;
-		free(*head);
-		*head = next;
+		else
+		{
+			free(*h);
+			*h = NULL;
+			l++;
+			break;
+		}
 	}
-	free(list);
-	return (n);
+
+	*h = NULL;
+
+	return (l);
 }
